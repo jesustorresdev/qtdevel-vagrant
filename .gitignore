@@ -1,0 +1,8 @@
+# Vagrant
+/.vagrant/
+/chef/
+
+# Vim
+*.swp*
+*.swo*
+

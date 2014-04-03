@@ -1,0 +1,6 @@
+site "http://community.opscode.com/api/v1" 
+
+cookbook "timezone-ii"
+cookbook "apt"
+cookbook "vim"
+cookbook "ssh_known_hosts"
