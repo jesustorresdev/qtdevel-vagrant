@@ -58,6 +58,7 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
     vb.customize ["modifyvm", :id, "--vram", "16"]
     vb.customize ["modifyvm", :id, "--accelerate3d", "on"]
     vb.customize ["modifyvm", :id, "--natdnshostresolver1", "on"]
+    vb.customize ["modifyvm", :id, "--clipboard", "bidirectional"]
   end
   #
   # View the documentation for the provider you're using for more
@@ -134,6 +135,7 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
     chef.add_recipe "locale"
     chef.add_recipe "ubuntu-desktop"
     chef.add_recipe "vim-default-editor"
+    chef.add_recipe "vbox-guest-additions"
     chef.add_recipe "git"
     chef.add_recipe "github"
     #
