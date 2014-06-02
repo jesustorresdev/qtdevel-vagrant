@@ -138,6 +138,7 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
     chef.add_recipe "vbox-guest-additions"
     chef.add_recipe "git"
     chef.add_recipe "github"
+    chef.add_recipe "qt"
     #
     chef.json = {
       :keyboard => {
