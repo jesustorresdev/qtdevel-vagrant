@@ -11,9 +11,9 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
 
   # Every Vagrant virtual environment requires a box to build off of.
   ###
-  ### We are working with 32-bit Ubuntu 13.10 Saucy Salamander but it 
+  ### We are working with 32-bit Ubuntu 12.10 Quantal Quetzal but it 
   ### should work with its 64-bit version.
-  config.vm.box = "chef/ubuntu-13.10-i386"
+  config.vm.box = "chef/ubuntu-12.10-i386"
 
   # The url from where the 'config.vm.box' box will be fetched if it
   # doesn't already exist on the user's system.
