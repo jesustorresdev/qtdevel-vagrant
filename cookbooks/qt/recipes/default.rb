@@ -1,16 +1,19 @@
+include_recipe "ubuntu-desktop"
+
 package "wget" do
   action :install
 end
 
-directory "/home/vagrant/Desktop" do
-  owner "vagrant"
-  group "vagrant"
-  mode 00755
-  action :create
-end
-
-execute "download-installers" do
+bash "download-installers" do
   user "vagrant"
-  cwd "/home/vagrant/Desktop"
-  command "wget -r -np -nd -Arun #{node[:qt][:online_installers_url]}"
+  group "vagrant"
+  environment ({'HOME' => '/home/vagrant', 'USER' => 'vagrant'})
+  code <<-EOF
+    set -e
+    cd "$(xdg-user-dir DESKTOP)"
+    wget --recursive --no-parent --no-directories \
+         --accept 'qt-opensource-linux-*-online.run' \
+           '#{node[:qt][:online_installers_url]}/'
+    chmod 0755 qt-opensource-linux-*-online.run
+  EOF
 end
