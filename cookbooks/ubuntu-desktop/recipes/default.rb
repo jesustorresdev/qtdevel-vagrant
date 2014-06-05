@@ -31,3 +31,14 @@ execute "set-session" do
   command "/usr/lib/lightdm/lightdm-set-defaults -s gnome-fallback"
   notifies :restart, "service[lightdm]", :delayed
 end
+
+# Update XDG directory configuration of user 'vagrant'
+
+execute "xdg-user-dirs-update" do
+  user "vagrant"
+  group "vagrant"
+  environment ({'HOME' => '/home/vagrant',
+                'USER' => 'vagrant',
+                'LANG' => node[:locale][:default],
+                'LC_ALL' => node[:locale][:default]})
+end
