@@ -1,5 +1,13 @@
 include_recipe "ubuntu-desktop"
 
+## Qt requires the OpenGL development files
+
+package "libgl1-mesa-dev" do
+  action :install
+end
+
+## Download the Qt Designer installer
+
 package "wget" do
   action :install
 end
