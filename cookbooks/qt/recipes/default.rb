@@ -6,7 +6,7 @@ package "libgl1-mesa-dev" do
   action :install
 end
 
-## Download the Qt Designer installer
+## Download the Qt Creator installer
 
 package "wget" do
   action :install

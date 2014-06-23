@@ -1,6 +1,4 @@
 mantainer       "Jesús Torres"
 mantainer_email "jmtorres@ull.es"
 license         "BSD"
-description     "Installs the lastest Git version control system"
-
-depends "apt"
+description     "Installs and configures Ubuntu for use as a desktop computer"

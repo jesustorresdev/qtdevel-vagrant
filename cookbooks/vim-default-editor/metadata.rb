@@ -1,1 +1,6 @@
+mantainer       "Jesús Torres"
+mantainer_email "jmtorres@ull.es"
+license         "BSD"
+description     "Setup Vim as default system editor"
+
 depends "vim"
