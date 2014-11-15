@@ -76,5 +76,5 @@ from the directory of this repository.
 
 # Copyright and license
 
-Copyright (c) 2014, Jesús Torres <jmtorres@ull.es>. Use of this source code is
+Copyright (c) 2014, Jesús Torres &lt;<jmtorres@ull.es>&gt;. Use of this source code is
 governed by a BSD-style license that can be found in the LICENSE file.
