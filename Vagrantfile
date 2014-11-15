@@ -129,6 +129,7 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   #   chef.roles_path = "roles"
   #   chef.data_bags_path = "../my-recipes/data_bags"
     chef.log_level = :debug
+    chef.add_recipe "repair-sources"
     chef.add_recipe "apt"
     chef.add_recipe "timezone-ii"
     chef.add_recipe "keyboard"
