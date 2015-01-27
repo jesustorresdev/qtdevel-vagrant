@@ -140,6 +140,8 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
     chef.add_recipe "git"
     chef.add_recipe "github"
     chef.add_recipe "qt"
+    # Some project specific development tools
+    chef.add_recipe "videovigilancia-devel"
     #
     chef.json = {
       :keyboard => {
