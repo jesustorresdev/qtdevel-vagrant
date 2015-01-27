@@ -25,7 +25,7 @@ Mainly, you need Vagrant and some additional plugins:
  * Vagrant >= 1.5
  * Vagrant-librarian-chef
  * Vagrant-omnibus (optional, if we are to use a Vagrant box with Chef
-pre-installed. That is not the case with the default box in our Vagrantfile)
+pre-installed. That isn't the case with the default box in our Vagrantfile)
 
 Vagrant-librarin-chef and vagrant-omnibus plugins could be easily installed from
 Vagrant running:
@@ -34,6 +34,21 @@ Vagrant running:
     $ vagrant plugin install vagrant-librarian-chef
 
 from command line.
+
+## Build a virtual machine
+
+To create the Vagrant virtual machine, just run:
+
+    $ vagrant up 
+
+from the directory of this repository, where is the Vagrantfile.
+
+If the previous command is successful, remember you can manage the new virtual
+machine using the following Vagrant commands:
+
+ * `vagrant halt`, to stop the virtual machine.
+ * `vagrant destroy`, to remove the virtual machine.
+ * `vagrant ssh`, to enter the virtual machine.
 
 ## Software provisioned
 
@@ -49,7 +64,7 @@ Ubuntu Desktop and download the Qt Creator installer:
     chef.add_recipe "qt"
 ```
 
-Currently, Qt Creator is not automatically installed because it doesn't support
+Currently, Qt Creator isn't automatically installed because it doesn't support
 unattended installations. But it is downloaded to the desktop, so we can easily
 run the installer.
 
@@ -64,17 +79,10 @@ so you only have to add your key to the SSH agent
 
     $ ssh-add
 
-before build a new virtual machine.
-
-## Build a virtual machine
-
-To create the Vagrant virtual machine, just run:
-
-    $ vagrant up 
-
-from the directory of this repository.
+before build a new virtual machine with `vagrant up`.
 
 # Copyright and license
 
-Copyright (c) 2014, Jesús Torres &lt;<jmtorres@ull.es>&gt;. Use of this source code is
-governed by a BSD-style license that can be found in the LICENSE file.
+Copyright (c) 2014-2015, Jesús Torres &lt;<jmtorres@ull.es>&gt;. Use of this
+source code is governed by a BSD-style license that can be found in the LICENSE
+file.
