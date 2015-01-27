@@ -61,7 +61,7 @@ Ubuntu Desktop and download the Qt Creator installer:
     chef.add_recipe "ubuntu-desktop"
     chef.add_recipe "vim-default-editor"
     ...
-    chef.add_recipe "qt"
+    chef.add_recipe "qtproject"
 ```
 
 Currently, Qt Creator isn't automatically installed because it doesn't support
