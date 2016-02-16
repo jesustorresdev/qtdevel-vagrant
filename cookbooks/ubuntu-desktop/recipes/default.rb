@@ -26,11 +26,11 @@ package "gnome-session-fallback" do
   action :install
 end
 
-execute "set-session" do
-  user "root"
-  command "/usr/lib/lightdm/lightdm-set-defaults -s gnome-fallback"
-  notifies :restart, "service[lightdm]", :delayed
-end
+#execute "set-session" do
+#  user "root"
+#  command "/usr/lib/lightdm/lightdm-set-defaults -s gnome-fallback"
+#  notifies :restart, "service[lightdm]", :delayed
+#end
 
 # Update XDG directory configuration of user 'vagrant'
 

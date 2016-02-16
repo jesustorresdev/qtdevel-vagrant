@@ -11,13 +11,12 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
 
   # Every Vagrant virtual environment requires a box to build off of.
   ###
-  ### We are working with 32-bit Ubuntu 12.10 Quantal Quetzal but it 
-  ### should work with its 64-bit version.
-  config.vm.box = "chef/ubuntu-12.10-i386"
+  ### Updated to 64 bit desktop
+  config.vm.box = "box-cutter/ubuntu1404-desktop"
 
   # The url from where the 'config.vm.box' box will be fetched if it
   # doesn't already exist on the user's system.
-  # config.vm.box_url = "http://domain.com/path/to/above.box"
+  config.vm.box_url = "https://vagrantcloud.com/box-cutter/boxes/ubuntu1404-desktop"
 
   # Create a forwarded port mapping which allows access to a specific port
   # within the machine from a port on the host machine. In the example below,
@@ -129,13 +128,13 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   #   chef.roles_path = "roles"
   #   chef.data_bags_path = "../my-recipes/data_bags"
     chef.log_level = :debug
-    chef.add_recipe "repair-sources"
+    #chef.add_recipe "repair-sources"
     chef.add_recipe "apt"
     chef.add_recipe "timezone-ii"
     chef.add_recipe "keyboard"
     chef.add_recipe "locale"
-    chef.add_recipe "ubuntu-desktop"
-    chef.add_recipe "vim-default-editor"
+    #chef.add_recipe "ubuntu-desktop"
+    #chef.add_recipe "vim-default-editor"
     chef.add_recipe "vbox-guest-additions"
     chef.add_recipe "git"
     chef.add_recipe "github"
