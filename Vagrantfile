@@ -10,13 +10,11 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   # please see the online documentation at vagrantup.com.
 
   # Every Vagrant virtual environment requires a box to build off of.
-  ###
-  ### Updated to 64 bit desktop
-  config.vm.box = "box-cutter/ubuntu1404-desktop"
+  config.vm.box = "ubuntu/vivid64"
 
   # The url from where the 'config.vm.box' box will be fetched if it
   # doesn't already exist on the user's system.
-  config.vm.box_url = "https://vagrantcloud.com/box-cutter/boxes/ubuntu1404-desktop"
+  # config.vm.box_url = "http://domain.com/path/to/above.box"
 
   # Create a forwarded port mapping which allows access to a specific port
   # within the machine from a port on the host machine. In the example below,
@@ -128,13 +126,12 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   #   chef.roles_path = "roles"
   #   chef.data_bags_path = "../my-recipes/data_bags"
     chef.log_level = :debug
-    #chef.add_recipe "repair-sources"
     chef.add_recipe "apt"
     chef.add_recipe "timezone-ii"
     chef.add_recipe "keyboard"
     chef.add_recipe "locale"
-    #chef.add_recipe "ubuntu-desktop"
-    #chef.add_recipe "vim-default-editor"
+    chef.add_recipe "ubuntu-desktop"
+    chef.add_recipe "vim-default-editor"
     chef.add_recipe "vbox-guest-additions"
     chef.add_recipe "git"
     chef.add_recipe "github"
@@ -143,6 +140,10 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
     chef.add_recipe "videovigilancia-devel"
     #
     chef.json = {
+      :desktop => {
+  #        :session => "default",                 # Ubuntu Unity
+        :session => "gnome-flashback-metacity", # Ubuntu Classic without effects
+      },
       :keyboard => {
         :layout => "es",
       },
