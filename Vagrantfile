@@ -53,7 +53,8 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
     # Use VBoxManage to customize the VM. For example to change memory:
     vb.customize ["modifyvm", :id, "--memory", "2048"]
     vb.customize ["modifyvm", :id, "--vram", "16"]
-    vb.customize ["modifyvm", :id, "--accelerate3d", "on"]
+    # Qt Creator doesn't currently work with 3D acceleration.
+    vb.customize ["modifyvm", :id, "--accelerate3d", "off"]
     vb.customize ["modifyvm", :id, "--natdnshostresolver1", "on"]
     vb.customize ["modifyvm", :id, "--clipboard", "bidirectional"]
   end
