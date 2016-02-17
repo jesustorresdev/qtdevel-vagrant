@@ -20,8 +20,8 @@ bash "download-installers" do
     set -e
     cd "$(xdg-user-dir DESKTOP)"
     wget --recursive --no-parent --no-directories \
-         --accept 'qt-opensource-linux-*-online.run' \
+         --accept 'qt-unified-linux-x64-online.run' \
            '#{node[:qt][:online_installers_url]}/'
-    chmod 0755 qt-opensource-linux-*-online.run
+    chmod 0755 qt-unified-linux-x64-online.run
   EOF
 end

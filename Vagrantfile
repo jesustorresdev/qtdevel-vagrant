@@ -10,10 +10,7 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   # please see the online documentation at vagrantup.com.
 
   # Every Vagrant virtual environment requires a box to build off of.
-  ###
-  ### We are working with 32-bit Ubuntu 12.10 Quantal Quetzal but it 
-  ### should work with its 64-bit version.
-  config.vm.box = "chef/ubuntu-12.10-i386"
+  config.vm.box = "ubuntu/vivid64"
 
   # The url from where the 'config.vm.box' box will be fetched if it
   # doesn't already exist on the user's system.
@@ -129,7 +126,6 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   #   chef.roles_path = "roles"
   #   chef.data_bags_path = "../my-recipes/data_bags"
     chef.log_level = :debug
-    chef.add_recipe "repair-sources"
     chef.add_recipe "apt"
     chef.add_recipe "timezone-ii"
     chef.add_recipe "keyboard"
@@ -144,6 +140,10 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
     chef.add_recipe "videovigilancia-devel"
     #
     chef.json = {
+      :desktop => {
+  #        :session => "default",                 # Ubuntu Unity
+        :session => "gnome-flashback-metacity", # Ubuntu Classic without effects
+      },
       :keyboard => {
         :layout => "es",
       },
