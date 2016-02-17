@@ -36,8 +36,10 @@ template "/etc/lightdm/lightdm.conf" do
   mode 0644
   owner "root"
   group "root"
-  variables ({:autologin_user => :vagrant,
-              :user_session => node[:desktop][:session]})
+  variables ({
+    :autologin_user => :vagrant,
+    :user_session => node[:desktop][:session]
+  })
 end
 
 # Update XDG directory configuration of user 'vagrant'
@@ -45,9 +47,11 @@ end
 execute "xdg-user-dirs-update" do
   user "vagrant"
   group "vagrant"
-  environment ({'HOME' => '/home/vagrant',
-                'USER' => 'vagrant',
-                'LANG' => node[:locale][:default],
-                'LC_ALL' => node[:locale][:default]})
+  environment ({
+    'HOME' => '/home/vagrant',
+    'USER' => 'vagrant',
+    'LANG' => node[:locale][:default],
+    'LC_ALL' => node[:locale][:default]
+  })
   notifies :restart, "service[lightdm]", :delayed
 end
