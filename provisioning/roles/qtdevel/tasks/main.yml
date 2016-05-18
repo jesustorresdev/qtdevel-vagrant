@@ -19,3 +19,5 @@
 
 - name: install Qt
   shell: "{{ qt_installer }} -platform minimal --script {{ qt_installer|dirname }}/qt-installer-noninteractive.qs"
+  args:
+    creates: /opt/Qt/MaintenanceTool

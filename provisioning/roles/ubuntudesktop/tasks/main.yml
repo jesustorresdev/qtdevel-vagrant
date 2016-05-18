@@ -8,10 +8,6 @@
     - gnome-terminal
     - ttf-ubuntu-font-family  # fix letters overlapping in the terminal
 
-- name: set default session and enable autologin
-  template: dest=/etc/lightdm/lightdm.conf src=lightdm.conf.j2
-  notify: restart lightdm
-
 - name: update XDG directory configuration of user 'vagrant'
   shell: xdg-user-dirs-update
   become: yes
@@ -23,8 +19,17 @@
   changed_when: false
   ignore_errors: yes
 
-# vboxvideo kernel module requires DRM
-- name: install kernel extras
-  apt: name=linux-image-extra-{{ ansible_kernel }} state=latest
-  when: vbox_guest_installed.rc == 0
-  notify: restart virtualbox-guest-x11
+- block:
+  - name: set default session and enable autologin
+    template: dest=/etc/lightdm/lightdm.conf src=lightdm.conf.j2
+    notify: restart lightdm
+
+  # vboxvideo kernel module requires DRM
+  - name: install kernel extras
+    apt: name=linux-image-extra-{{ ansible_kernel }} state=latest
+    when: vbox_guest_installed.rc == 0
+    notify: restart virtualbox-guest-x11
+
+  rescue:
+    - name: run all pending handlers
+      meta: flush_handlers
