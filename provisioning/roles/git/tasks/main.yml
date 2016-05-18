@@ -1,0 +1,7 @@
+---
+# taks file for git
+- name: add git repository
+  apt_repository: repo='ppa:git-core/ppa'
+
+- name: install git
+  apt: name=git state=latest

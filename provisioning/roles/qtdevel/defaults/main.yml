@@ -1,0 +1,6 @@
+---
+# defaults file for qtdevel
+qt_arquitectures: { x86: x86, x86_64: x64 }
+qt_installer_url: http://download.qt.io/official_releases/online_installers/qt-unified-linux-{{ qt_arquitectures[ansible_architecture] }}-online.run
+qt_installer: /tmp/qtproject/qt.run
+qt_components: {}

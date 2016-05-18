@@ -1,0 +1,30 @@
+---
+# tasks file for ubuntu-desktop
+- name: install Ubuntu Desktop packages
+  apt: name={{ item }} install_recommends=no state=latest
+  with_items:
+    - ubuntu-desktop
+    - gnome-session-flashback
+    - gnome-terminal
+    - ttf-ubuntu-font-family  # fix letters overlapping in the terminal
+
+- name: set default session and enable autologin
+  template: dest=/etc/lightdm/lightdm.conf src=lightdm.conf.j2
+  notify: restart lightdm
+
+- name: update XDG directory configuration of user 'vagrant'
+  shell: xdg-user-dirs-update
+  become: yes
+  become_user: vagrant
+
+- name: determine if VirtualBox Guest Additions is installed
+  shell: modinfo vboxguest 2>/dev/null
+  register: vbox_guest_installed
+  changed_when: false
+  ignore_errors: yes
+
+# vboxvideo kernel module requires DRM
+- name: install kernel extras
+  apt: name=linux-image-extra-{{ ansible_kernel }} state=latest
+  when: vbox_guest_installed.rc == 0
+  notify: restart virtualbox-guest-x11

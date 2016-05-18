@@ -1,0 +1,9 @@
+---
+# handlers file for ubuntu-desktop
+- name: restart virtualbox-guest-x11
+  service: name=virtualbox-guest-x11 state=restarted
+  notify: restart lightdm
+
+- name: restart lightdm
+  service: name=lightdm state=restarted
+

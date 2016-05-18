@@ -1,0 +1,25 @@
+---
+- hosts: all
+  remote_user: root
+  vars:
+    timezone: Atlantic/Canary
+    locale: es_ES.UTF-8
+    keyboard_layout: es
+#    desktop_session: default                    # Ubuntu Unity
+    desktop_session: gnome-flashback-metacity   # Ubuntu Classic without effects
+  roles:
+    - common
+    - ubuntudesktop
+    - git
+    - qtdevel
+  tasks:
+    - name: install project specific development tools
+      apt: name={{ item }} state=latest
+      with_items:
+        - libcv-dev
+        - sqlite3
+        - sqliteman
+        - netcat-openbsd
+        - checkinstall
+        - protobuf-compiler
+        - libprotobuf-dev

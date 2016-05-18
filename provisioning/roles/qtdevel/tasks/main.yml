@@ -1,0 +1,21 @@
+---
+# tasks file for qtdevel
+- name: install OpenGL development packages
+  apt: name=libgl1-mesa-dev state=latest
+
+- name: create a download directory 
+  file: path={{ qt_installer|dirname }} state=directory
+
+- name: download the Qt installer
+  get_url:
+    url: "{{ qt_installer_url }}"
+    dest: "{{ qt_installer }}"
+
+- name: enable Qt installer execution permissions
+  file: path={{ qt_installer }} mode=755
+
+- name: create non-interactive Qt installer script
+  template: src=qt-installer-noninteractive.qs.j2 dest={{ qt_installer|dirname }}/qt-installer-noninteractive.qs
+
+- name: install Qt
+  shell: "{{ qt_installer }} -platform minimal --script {{ qt_installer|dirname }}/qt-installer-noninteractive.qs"

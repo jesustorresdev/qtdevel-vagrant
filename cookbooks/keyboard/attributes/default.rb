@@ -1,5 +1,0 @@
-default[:keyboard][:config_file]    = "/etc/default/keyboard"
-default[:keyboard][:model]          = "pc105"
-default[:keyboard][:layout]         = "us"
-default[:keyboard][:variant]        = ""
-default[:keyboard][:options]        = "" 

@@ -1,0 +1,6 @@
+---
+# defaults for git
+ssh_known_hosts:
+  - github.com
+  - gitlab.com
+  - bitbucket.org

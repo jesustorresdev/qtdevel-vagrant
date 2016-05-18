@@ -75,10 +75,13 @@ Vagrant.configure(2) do |config|
   #   sudo apt-get install -y apache2
   # SHELL
 
-  ###
-  ### Enable provisioning
+  ### If true, then any SSH connections made will enable agent forwarding.
+  ### Default value: false
+  config.ssh.forward_agent = true
 
   ###
+  ### Configure provisioning
+
   ### Copy the user Git configuration to the new VM.
   if File.exists? File.expand_path("~/.gitconfig")
     config.vm.provision "file" do |file|
@@ -87,95 +90,21 @@ Vagrant.configure(2) do |config|
     end
   end
 
-  # Enable provisioning with chef solo, specifying a cookbooks path, roles
-  # path, and data_bags path (all relative to this Vagrantfile), and adding
-  # some recipes and/or roles.
-  #
   ###
-  ### If is available, Valgrant-omnibus is used to install Chef in
-  ### provisioner-less boxes.
-  if Vagrant.has_plugin?("vagrant-omnibus")
-    config.omnibus.chef_version = :latest
+  ### Run Ansible from the Vagrant VM
+  config.vm.provision "ansible_local" do |ansible|
+    ansible.playbook = "provisioning/playbook.yml"
+    ansible.galaxy_role_file = "provisioning/requirements.yml"
+    ansible.install = true
+    ansible.sudo = true
+  ### Ansible_local 'extra_vars' are ignored in Vagrant 1.8 (#6726)
+  ### https://github.com/mitchellh/vagrant/issues/6726
+  #   ansible.extra_vars = {
+  #     :timezone => "Atlantic/Canary",
+  #     :locale => "es_ES.UTF-8",
+  #     :keyboard_layout => "es",
+  #     :desktop_session => "default",                   # Ubuntu Unity
+  #     :desktop_session => "gnome-flashback-metacity",   # Ubuntu Classic without effects
+  #   }
   end
-
-  ###
-  ### Valgrant-librarian-chef is used to download the required Chef cookbooks
-  ### and its dependencies.
-  unless Vagrant.has_plugin?("vagrant-librarian-chef")
-    raise 'Vagrant-librarian-chef plugin is required!. Try "vagrant plugin install vagrant-librarian-chef" first' 
-  end
-  config.librarian_chef.cheffile_dir = "chef"
-  ###
-  ### Valgrant-librarian-chef is used to download the required Chef cookbooks
-  ### and its dependencies.
-  unless Vagrant.has_plugin?("vagrant-librarian-chef")
-    raise 'Vagrant-librarian-chef plugin is required!. Try "vagrant plugin install vagrant-librarian-chef" first' 
-  end
-  config.librarian_chef.cheffile_dir = "chef"
-
-  ###
-  ### Somebody says it is more programmer friendly than Puppet
-  config.vm.provision "chef_solo" do |chef|
-    chef.cookbooks_path =  ["cookbooks", "chef/cookbooks"]
-  #   chef.roles_path = "roles"
-  #   chef.data_bags_path = "../my-recipes/data_bags"
-    chef.log_level = :debug
-    chef.add_recipe "apt"
-    chef.add_recipe "timezone-ii"
-    chef.add_recipe "keyboard"
-    chef.add_recipe "locale"
-    chef.add_recipe "ubuntu-desktop"
-    chef.add_recipe "vim-default-editor"
-    chef.add_recipe "vbox-guest-additions"
-    chef.add_recipe "git"
-    chef.add_recipe "github"
-    chef.add_recipe "qtproject"
-    # Some project specific development tools
-    chef.add_recipe "videovigilancia-devel"
-    #
-    chef.json = {
-      :desktop => {
-  #        :session => "default",                 # Ubuntu Unity
-        :session => "gnome-flashback-metacity", # Ubuntu Classic without effects
-      },
-      :keyboard => {
-        :layout => "es",
-      },
-      :locale => {
-        :language => "es",
-        :territory => "ES",
-      },
-      :tz => "Atlantic/Canary"
-    }
-  #
-  #   # You may also specify custom JSON attributes:
-  #   chef.json = { :mysql_password => "foo" }
-  end
-
-  # If true, then any SSH connections made will enable agent forwarding.
-  # Default value: false
-  config.ssh.forward_agent = true
-
-  # Enable provisioning with chef server, specifying the chef server URL,
-  # and the path to the validation key (relative to this Vagrantfile).
-  #
-  # The Opscode Platform uses HTTPS. Substitute your organization for
-  # ORGNAME in the URL and validation key.
-  #
-  # If you have your own Chef Server, use the appropriate URL, which may be
-  # HTTP instead of HTTPS depending on your configuration. Also change the
-  # validation key to validation.pem.
-  #
-  # config.vm.provision "chef_client" do |chef|
-  #   chef.chef_server_url = "https://api.opscode.com/organizations/ORGNAME"
-  #   chef.validation_key_path = "ORGNAME-validator.pem"
-  # end
-  #
-  # If you're using the Opscode platform, your validator client is
-  # ORGNAME-validator, replacing ORGNAME with your organization name.
-  #
-  # If you have your own Chef Server, the default validation client name is
-  # chef-validator, unless you changed the configuration.
-  #
-  #   chef.validation_client_name = "ORGNAME-validator"
 end

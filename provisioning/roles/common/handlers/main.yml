@@ -1,0 +1,4 @@
+---
+# handlers file for common
+- name: update keyboard-configuration
+  command: dpkg-reconfigure --frontend noninteractive keyboard-configuration

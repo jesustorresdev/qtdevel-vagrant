@@ -1,6 +1,6 @@
 # Vagrant
 /.vagrant*/
-/chef/
+/provisioning/playbook.retry
 
 # Vim
 *.swp*

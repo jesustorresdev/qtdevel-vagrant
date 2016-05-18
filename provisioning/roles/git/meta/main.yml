@@ -1,0 +1,3 @@
+---
+dependencies:
+ - igor_mukhin.ssh_known_hosts
