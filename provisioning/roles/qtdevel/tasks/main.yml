@@ -1,7 +1,11 @@
 ---
 # tasks file for qtdevel
-- name: install OpenGL development packages
-  apt: name=libgl1-mesa-dev state=latest
+- name: install development packages
+  apt: name={{ item }} state=latest
+  with_items:
+    - libgl1-mesa-dev
+    - build-essential
+    - gdb
 
 - name: determine if Qt is installed
   stat: path=/opt/Qt/MaintenanceTool
