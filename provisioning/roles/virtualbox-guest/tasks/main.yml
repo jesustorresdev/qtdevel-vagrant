@@ -1,0 +1,9 @@
+---
+# tasks file for virtualbox-guest
+- name: install VirtualBox Guest Additions packages
+  apt: name={{ item }} install_recommends=yes state=latest
+  with_items:
+    - virtualbox-guest-utils
+    - virtualbox-guest-dkms
+    - virtualbox-guest-x11
+  notify: restart virtualbox-guest-utils

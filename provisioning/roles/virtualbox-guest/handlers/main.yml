@@ -1,0 +1,4 @@
+---
+# handlers file for virtualbox-guest
+- name: restart virtualbox-guest-utils
+  service: name=virtualbox-guest-utils state=restarted

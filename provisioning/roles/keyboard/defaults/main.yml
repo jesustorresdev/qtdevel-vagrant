@@ -1,6 +1,5 @@
 ---
-# defaults file for common
-locale: en_US.UTF-8
+# defaults file for keyboard
 keyboard_model: pc105
 keyboard_layout: us
 keyboard_variant: ""

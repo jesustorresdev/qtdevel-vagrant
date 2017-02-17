@@ -4,6 +4,7 @@
   apt: name={{ item }} state=latest
   with_items:
     - libgl1-mesa-dev
+    - libpulse-dev
     - build-essential
     - gdb
 
@@ -27,6 +28,6 @@
     template: src=qt-installer-noninteractive.qs.j2 dest={{ qt_installer|dirname }}/qt-installer-noninteractive.qs
 
   - name: install Qt
-    shell: "{{ qt_installer }} -platform minimal --script {{ qt_installer|dirname }}/qt-installer-noninteractive.qs"
+    command: "{{ qt_installer }} -platform minimal --script {{ qt_installer|dirname }}/qt-installer-noninteractive.qs"
 
   when: not qt_installed.stat.exists

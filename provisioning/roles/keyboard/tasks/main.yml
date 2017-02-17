@@ -1,0 +1,5 @@
+---
+# tasks file for keyboard
+- name: set keyboard configuration
+  template: dest=/etc/default/keyboard src=keyboard.j2
+  notify: update keyboard-configuration

@@ -1,0 +1,12 @@
+---
+# handlers file for language
+- name: update language packages
+  shell: check-language-support -l {{ locale.split('_')[0] }} 2>/dev/null
+  register: language_packages
+  changed_when: language_packages.stdout != ""
+  ignore_errors: yes
+  notify: install language packages
+
+- name: install language packages
+  apt: name={{ item }} state=latest
+  with_items: "{{ language_packages.stdout.split() }}"

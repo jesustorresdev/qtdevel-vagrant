@@ -1,0 +1,8 @@
+# tasks file for byobu
+- name: install byobu text-based window manager
+  apt: name=byobu state=latest
+
+- name: enable byobu
+  command: byobu-enable
+  become: yes
+  become_user: "{{ desktop_user }}"

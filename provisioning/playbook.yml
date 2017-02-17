@@ -1,15 +1,10 @@
 ---
 - hosts: all
   remote_user: root
-  vars:
-    timezone: Atlantic/Canary
-    locale: es_ES.UTF-8
-    keyboard_layout: es
-#    desktop_session: default                    # Ubuntu Unity
-    desktop_session: gnome-flashback-metacity   # Ubuntu Classic without effects
   roles:
-    - common
     - ubuntudesktop
+    - byobu
+    - vim
     - git
     - qtdevel
   tasks:

@@ -2,3 +2,5 @@
 # meta file for common
 dependencies:
   - knopki.timezone
+  - keyboard
+  - language

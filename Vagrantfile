@@ -12,7 +12,7 @@ Vagrant.configure(2) do |config|
 
   # Every Vagrant development environment requires a box. You can search for
   # boxes at https://atlas.hashicorp.com/search.
-  config.vm.box = "ubuntu/vivid64"
+  config.vm.box = "bento/ubuntu-16.04"
 
   # Disable automatic box update checking. If you disable this, then
   # boxes will only be checked for updates when the user runs
@@ -44,17 +44,24 @@ Vagrant.configure(2) do |config|
   # Example for VirtualBox:
   #
   config.vm.provider "virtualbox" do |vb|
-    # Display the VirtualBox GUI when booting the machine
-    vb.gui = true
+    vb.name = "qtdevel"
+    vb.linked_clone = true
 
-    # Customize the amount of memory on the VM:
+    # Display the VirtualBox GUI when booting the machine.
+    vb.gui = true
+    vb.customize ["modifyvm", :id, "--vram", "12"]
+    vb.customize ["modifyvm", :id, "--accelerate3d", "on"]
+    vb.customize ["modifyvm", :id, "--accelerate2dvideo", "on"]
+
+    # Customize the amount of memory on the VM.
     vb.memory = "2048"
 
     ### Use VBoxManage to customize the VM.
     vb.customize ["modifyvm", :id, "--clipboard", "bidirectional"]
     vb.customize ["modifyvm", :id, "--natdnshostresolver1", "on"]
-    ### Qt Creator doesn't currently work with 3D acceleration.
-    vb.customize ["modifyvm", :id, "--accelerate3d", "off"]
+    ### Fix a bug enabling network interfaces
+    ### https://github.com/mitchellh/vagrant/issues/6871
+    vb.customize ["modifyvm", :id, "--cableconnected1", "on"]
   end
   #
   # View the documentation for the provider you're using for more
@@ -97,14 +104,12 @@ Vagrant.configure(2) do |config|
     ansible.galaxy_role_file = "provisioning/requirements.yml"
     ansible.install = true
     ansible.sudo = true
-  ### Ansible_local 'extra_vars' are ignored in Vagrant 1.8 (#6726)
-  ### https://github.com/mitchellh/vagrant/issues/6726
-  #   ansible.extra_vars = {
-  #     :timezone => "Atlantic/Canary",
-  #     :locale => "es_ES.UTF-8",
-  #     :keyboard_layout => "es",
-  #     :desktop_session => "default",                   # Ubuntu Unity
-  #     :desktop_session => "gnome-flashback-metacity",   # Ubuntu Classic without effects
-  #   }
+    ansible.extra_vars = {
+      :timezone => "Atlantic/Canary",
+      :locale => "es_ES.UTF-8",
+      :keyboard_layout => "es",
+#      :desktop_session => "gnome-flashback-metacity",   # Ubuntu Classic without effects
+      :desktop_session => "ubuntu",                    # Ubuntu Unity
+    }
   end
 end

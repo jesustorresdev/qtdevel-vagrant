@@ -1,0 +1,11 @@
+---
+# tasks file for language
+- name: generate locale definitions
+  locale_gen: name={{ locale }} state=present
+
+- name: setup system locale
+  command: update-locale --reset LANG={{ locale }}
+
+- debug: msg="trigger install language packages"
+  notify: update language packages
+  changed_when: true

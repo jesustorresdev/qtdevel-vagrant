@@ -1,0 +1,7 @@
+# tasks file for vim
+- name: install vim editor
+  apt: name=vim-tiny state=latest
+  
+- name: set vim as default editor
+  alternatives: name=editor path=/usr/bin/vim.basic
+ 
