@@ -1,3 +1,16 @@
 ---
-- src: knopki.timezone
-- src: igor_mukhin.ssh_known_hosts
+# Module for setting timezone on Debian-like systems.
+- name: timezone
+  src: knopki.timezone
+
+# Module to add sites to /etc/ssh/ssh_known_hosts for Debian/Ubuntu.
+- name: ssh_known_hosts
+  src: igor_mukhin.ssh_known_hosts
+
+# Module for seting GSettings entries.
+- name: gsetting
+  src: https://github.com/aplatanado/ansible-gsetting.git
+
+# Module for pinning applications to the desktop application launcher.
+- name: pin-to-launcher
+  src: gantsign.pin-to-launcher

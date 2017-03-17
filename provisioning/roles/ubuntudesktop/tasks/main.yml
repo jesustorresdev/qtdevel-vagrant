@@ -24,3 +24,8 @@
 - name: set default session and enable autologin
   template: dest=/etc/lightdm/lightdm.conf src=lightdm.conf.j2
   notify: restart lightdm
+
+- name: disable desktop lock-screen
+  gsetting: user={{ desktop_user }}
+            key=org.gnome.desktop.screensaver.ubuntu-lock-on-suspend
+            value=false

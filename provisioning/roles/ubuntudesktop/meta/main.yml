@@ -1,6 +1,7 @@
 ---
-# meta file for common
+# meta file for ubuntudesktop
 dependencies:
   - knopki.timezone
   - keyboard
   - language
+  - gsetting

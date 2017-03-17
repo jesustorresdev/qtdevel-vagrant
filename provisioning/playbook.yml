@@ -3,10 +3,15 @@
   remote_user: root
   roles:
     - ubuntudesktop
-    - byobu
     - vim
     - git
     - qtdevel
+    - byobu
+    - role: pin-to-launcher
+      pin_to_launcher: unity
+      pin_to_launcher_favorites: 
+        - application: byobu.desktop
+        - application: DigiaQt-qtcreator-community.desktop
   tasks:
     - name: install project specific development tools
       apt: name={{ item }} state=latest
