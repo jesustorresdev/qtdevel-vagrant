@@ -47,10 +47,11 @@ configure Ubuntu Desktop and Qt Creator with the default components:
 
 ```yaml
   roles:
-    - common
     - ubuntudesktop
+    - vim
     - git
     - qtdevel
+    - byobu
 ```
 
 ## Access to private repositories on Github
@@ -68,6 +69,6 @@ before build a new virtual machine with `vagrant up`.
 
 # Copyright and license
 
-Copyright (c) 2014-2016, Jesús Torres &lt;<jmtorres@ull.es>&gt;. Use of this
+Copyright (c) 2014-2017, Jesús Torres &lt;<jmtorres@ull.es>&gt;. Use of this
 source code is governed by a BSD-style license that can be found in the LICENSE
 file.
