@@ -50,8 +50,9 @@ Vagrant.configure(2) do |config|
     # Display the VirtualBox GUI when booting the machine.
     vb.gui = true
     vb.customize ["modifyvm", :id, "--vram", "12"]
-    vb.customize ["modifyvm", :id, "--accelerate3d", "on"]
-    vb.customize ["modifyvm", :id, "--accelerate2dvideo", "on"]
+    # Qt Creator doesn't currently work with 3D acceleration.
+    vb.customize ["modifyvm", :id, "--accelerate3d", "off"]
+    vb.customize ["modifyvm", :id, "--accelerate2dvideo", "off"]
 
     # Customize the amount of memory on the VM.
     vb.memory = "2048"
