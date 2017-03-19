@@ -17,9 +17,15 @@
       apt: name={{ item }} state=latest
       with_items:
         - libcv-dev
+        - checkinstall
+        - netcat-openbsd
+        # Sqlite tools
         - sqlite3
         - sqliteman
-        - netcat-openbsd
-        - checkinstall
+        # Google Protocol Buffer tools
         - protobuf-compiler
         - libprotobuf-dev
+        # GStreamer plugins
+        - gstreamer1.0-plugins-ugly
+        - gstreamer1.0-plugins-bad
+
