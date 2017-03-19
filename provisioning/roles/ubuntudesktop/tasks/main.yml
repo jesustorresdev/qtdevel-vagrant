@@ -25,7 +25,12 @@
   template: dest=/etc/lightdm/lightdm.conf src=lightdm.conf.j2
   notify: restart lightdm
 
-- name: disable desktop lock-screen
+- name: disable screen backout
   gsetting: user={{ desktop_user }}
-            key=org.gnome.desktop.screensaver.ubuntu-lock-on-suspend
+            key=org.gnome.desktop.session.idle-delay
+            value=0
+
+- name: disable the screen lock
+  gsetting: user={{ desktop_user }}
+            key=org.gnome.desktop.screensaver.lock-enabled
             value=false
