@@ -22,7 +22,13 @@ Vagrant.configure(2) do |config|
   # Create a forwarded port mapping which allows access to a specific port
   # within the machine from a port on the host machine. In the example below,
   # accessing "localhost:8080" will access port 80 on the guest machine.
+  # NOTE: This will enable public access to the opened port
   # config.vm.network "forwarded_port", guest: 80, host: 8080
+
+  # Create a forwarded port mapping which allows access to a specific port
+  # within the machine from a port on the host machine and only allow access
+  # via 127.0.0.1 to disable public access
+  # config.vm.network "forwarded_port", guest: 80, host: 8080, host_ip: "127.0.0.1"
 
   # Create a private network, which allows host-only access to the machine
   # using a specific IP.
@@ -49,23 +55,21 @@ Vagrant.configure(2) do |config|
 
     # Display the VirtualBox GUI when booting the machine.
     vb.gui = true
-    vb.customize ["modifyvm", :id, "--vram", "12"]
-    # Qt Creator doesn't currently work with 3D acceleration.
-    vb.customize ["modifyvm", :id, "--accelerate3d", "off"]
-    vb.customize ["modifyvm", :id, "--accelerate2dvideo", "off"]
 
     # Customize the amount of memory on the VM.
     vb.memory = "2048"
 
     ### Use VBoxManage to customize the VM.
+    vb.customize ["modifyvm", :id, "--vram", "12"]
     vb.customize ["modifyvm", :id, "--clipboard", "bidirectional"]
     vb.customize ["modifyvm", :id, "--natdnshostresolver1", "on"]
-    ### Fix a bug enabling network interfaces
-    ### https://github.com/mitchellh/vagrant/issues/6871
-    vb.customize ["modifyvm", :id, "--cableconnected1", "on"]
+
+    ### Qt Creator doesn't currently work with 3D acceleration.
+    vb.customize ["modifyvm", :id, "--accelerate3d", "off"]
+    vb.customize ["modifyvm", :id, "--accelerate2dvideo", "off"]
   end
   #
-  # View the documentation for the provider you're using for more
+  # View the documentation for the provider you are using for more
   # information on available options.
 
   # Define a Vagrant Push strategy for pushing to Atlas. Other push strategies
@@ -79,8 +83,8 @@ Vagrant.configure(2) do |config|
   # Puppet, Chef, Ansible, Salt, and Docker are also available. Please see the
   # documentation for more information about their specific syntax and use.
   # config.vm.provision "shell", inline: <<-SHELL
-  #   sudo apt-get update
-  #   sudo apt-get install -y apache2
+  #   apt-get update
+  #   apt-get install -y apache2
   # SHELL
 
   ### If true, then any SSH connections made will enable agent forwarding.
